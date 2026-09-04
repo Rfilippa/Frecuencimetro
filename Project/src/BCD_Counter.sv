@@ -24,7 +24,7 @@ module BCD_counter(
     input  logic       clk,
     input  logic       rst,
     input  logic       enb,
-    input logic        signal,
+    input  logic       signal,
     output logic [3:0] Digit,
     output logic       carry_out
 );
@@ -45,6 +45,6 @@ module BCD_counter(
         end 
     end
     // debería funcionar
-    assign carry_out = enb && (Digit == 4'd9);
+    assign carry_out = enb && signal &&  (Digit == 4'd9);
 
 endmodule

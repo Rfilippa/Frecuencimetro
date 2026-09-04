@@ -34,6 +34,7 @@ module Frequency_meter(
     logic [3:0] Dig1, Dig2, Dig3, Dig4;
     
     // para detectar solo el edge :) 
+    
     logic freq_sync_0, freq_sync_1, freq_sync_2;
     always_ff @(posedge clk) begin
         freq_sync_0 <= freq_in;
@@ -42,7 +43,8 @@ module Frequency_meter(
     end
     logic freq_edge;
     assign freq_edge = freq_sync_1 && !freq_sync_2;
-
+    
+    
     BaseTime1ms Base1 (.clk_in   (clk),
                        .rst      (reset),
                        .tick_out (tick_1ms)
@@ -78,9 +80,9 @@ module Frequency_meter(
 
 
     disp7seg_controller dispA(  .clk(cnt_display[13]),
-                                .bcd_dig({
+                                .bcd_dig('{
                                     Digit_bStream[15:12],
-                                    Digit_bStream[11:7],
+                                    Digit_bStream[11:8],
                                     Digit_bStream[7:4],
                                     Digit_bStream[3:0]
                                     }), // Aca se deben conectar los BCD de salida del LATCH
