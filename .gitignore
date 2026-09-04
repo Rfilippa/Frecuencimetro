@@ -1,0 +1,14 @@
+# Vivado logs y journals
+*.jou
+*.log
+*.str
+
+# Directorios de compilación y caché
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+*.runs/
+
+# Otros archivos temporales de Xilinx
+.Xil/
