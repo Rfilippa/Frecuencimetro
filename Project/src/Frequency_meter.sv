@@ -49,7 +49,7 @@ module Frequency_meter(
                        );
 
 
-    FSM_control Control_Unit (.clk      (clk),
+    FSM_Control Control_Unit (.clk      (clk),
                               .rst      (reset),
                               .tick_1ms (tick_1ms),
                               .cnt_en   (cnt_en),
@@ -72,13 +72,18 @@ module Frequency_meter(
     LatchR Latch (.clk               (clk),
                   .rst               (reset),
                   .enb               (latch_en),
-                  .Digit_in_bStream  ({Dig1, Dig2, Dig3, Dig4}),
-                  .Digit_out_bStream (Digit_bStream)
+                  .Digits_in_bStream  ({Dig1, Dig2, Dig3, Dig4}),
+                  .Digits_out_bStream (Digit_bStream)
                   );
 
 
     disp7seg_controller dispA(  .clk(cnt_display[13]),
-                                .bcd_dig(Digit_bStream), // Aca se deben conectar los BCD de salida del LATCH
+                                .bcd_dig({
+                                    Digit_bStream[15:12],
+                                    Digit_bStream[11:7],
+                                    Digit_bStream[7:4],
+                                    Digit_bStream[3:0]
+                                    }), // Aca se deben conectar los BCD de salida del LATCH
                                 .blank_dig(4'b0000),
                                 .seg(D0_SEG),
                                 .dig_en(D0_AN));

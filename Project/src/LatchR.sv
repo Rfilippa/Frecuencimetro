@@ -23,11 +23,11 @@ module LatchR(
     input clk,
     input rst,
     input enb,
-    input Digits_in_bStream,
-    output Digits_out_bStream
+    input [15:0] Digits_in_bStream,
+    output [15:0] Digits_out_bStream
     );
   
-    flopre #(4) fDigit1 (.clk    (clk),
+    flopre #(16) fDigit1 (.clk    (clk),
                          .reset  (rst),
                          .enable (enb),
                          .d      (Digits_in_bStream),
